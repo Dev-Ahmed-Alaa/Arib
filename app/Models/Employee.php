@@ -46,4 +46,35 @@ class Employee extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the employee's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
+     * Get the manager that manages the employee.
+     */
+    public function manager()
+    {
+        return $this->belongsTo(Employee::class, 'manager_id');
+    }
+
+    /**
+     * Get the employees managed by the manager.
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'manager_id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
 }

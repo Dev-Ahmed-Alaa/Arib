@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
  */
-class UserFactory extends Factory
+class EmployeeFactory extends Factory
 {
     /**
      * The current password being used by the factory.
@@ -27,18 +27,13 @@ class UserFactory extends Factory
             'first_name' => fake()->name(),
             'last_name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'password' => static::$password ??= Hash::make('password'),
+            'phone' => fake()->phoneNumber(),
+            'password' => static::$password ??= Hash::make('Arib@1234'),
             'remember_token' => Str::random(10),
+            'salary' => fake()->randomFloat(2, 1000, 10000),
+            'image' => fake()->imageUrl(),
+            'manager_id' => null,
+            'department_id' => null,
         ];
-    }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
     }
 }
