@@ -18,9 +18,9 @@ class EmployeeController extends Controller
      *
      * @return View
      */
-    public function index()
+    public function index(): View
     {
-        $employees = Employee::get();
+        $employees = Employee::whereNotNull('manager_id')->get();
         return view('employees.index', compact('employees'));
     }
 
@@ -29,9 +29,9 @@ class EmployeeController extends Controller
      *
      * @return View
      */
-    public function create()
+    public function create(): View
     {
-        $departments = Department::get();
+        $departments = Department::with('manager')->get();
         return view('employees.create', compact('departments'));
     }
 
@@ -56,7 +56,7 @@ class EmployeeController extends Controller
                 Employee::create($request->validated());
             }
 
-            return redirect()->route('employees');
+            return redirect()->route('employees')->with('success', 'Employee created successfully.');
         } catch (\Exception $e) {
             // If there was an error, delete the image from storage
             if (isset($imageName)) {
@@ -95,7 +95,7 @@ class EmployeeController extends Controller
      * @param Employee $employee
      * @return View
      */
-    public function edit(Employee $employee)
+    public function edit(Employee $employee): View
     {
         $departments = Department::get();
         return view('employees.edit', compact('employee', 'departments'));
@@ -129,7 +129,7 @@ class EmployeeController extends Controller
                 $employee->update($request->validated());
             }
 
-            return redirect()->route('employees');
+            return redirect()->route('employees')->with('success', 'Employee updated successfully.');
         } catch (\Exception $e) {
             // If there was an error, delete the new image from storage
             if (isset($imageName)) {
@@ -149,6 +149,6 @@ class EmployeeController extends Controller
     public function destroy(Employee $employee): RedirectResponse
     {
         $employee->delete();
-        return redirect()->route('employees');
+        return redirect()->route('employees')->with('success', 'Employee deleted successfully.');
     }
 }

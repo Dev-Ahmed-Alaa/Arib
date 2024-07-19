@@ -37,7 +37,7 @@
 
                     <div class="flex items-center justify-end mt-4">
                         <button class="ml-3" type="submit">
-                            {{ __('Create Department') }}
+                            {{ __('Update Department') }}
                         </button>
                     </div>
                 </form>

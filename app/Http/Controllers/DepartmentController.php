@@ -54,7 +54,7 @@ class DepartmentController extends Controller
     public function store(StoreDepartmentRequest $request): RedirectResponse
     {
         Department::create($request->validated());
-        return redirect()->route('departments');
+        return redirect()->route('departments')->with('success', 'Department created successfully.');
     }
 
 
@@ -77,7 +77,7 @@ class DepartmentController extends Controller
     public function update(UpdateDepartmentRequest $request, Department $department): RedirectResponse
     {
         $department->update($request->validated());
-        return redirect()->route('departments');
+        return redirect()->route('departments')->with('success', 'Department updated successfully.');
     }
 
     /**

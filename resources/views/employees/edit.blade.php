@@ -72,6 +72,21 @@
                             @enderror
                         </div>
                         <div>
+                            <x-input-label for="managers" :value="__('Managers')" />
+                            <select id="managers" name="manager_id" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm">
+                                @foreach($departments as $department)
+                                    @if($department->manager)
+                                    <option value="{{ $department->manager->id }}" {{ $employee->department->manager?->id == $department->manager->id ? 'selected' : '' }}>{{ $department->manager->full_name }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('manager_id')
+                            <div class="text-red-500 mt-2 text-sm">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div>
 
                             <x-input-label for="profile_image" :value="__('Profile Image')" />
                             <input id="profile_image" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm" type="file" name="image" />

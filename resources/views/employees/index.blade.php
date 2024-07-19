@@ -10,6 +10,11 @@
                 <div class="p-6 text-gray-900">
                     <div class="container">
                         <h1>Employees List</h1>
+                        @if (session('success'))
+                            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px;">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div class="controls">
                             <div class="search-container">
                                 <form method="GET" action="{{ route('employees.search') }}">

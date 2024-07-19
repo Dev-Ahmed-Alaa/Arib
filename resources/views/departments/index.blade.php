@@ -10,6 +10,11 @@
                 <div class="p-6 text-gray-900">
                     <div class="container">
                         <h1>Departments List</h1>
+                        @if (session('success'))
+                            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px;">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         @if (session('error'))
                             <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px;">
                                 {{ session('error') }}
