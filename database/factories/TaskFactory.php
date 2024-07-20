@@ -18,6 +18,8 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
+        $department = Department::factory()->create() ;
+
         return [
             'name' => $this->faker->unique()->word(),
             'description' => $this->faker->sentence(),
@@ -25,7 +27,11 @@ class TaskFactory extends Factory
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
             'employee_id' => Employee::factory()->create([
-                'department_id' => Department::factory()->create(),
+                'department_id' => $department,
+            ]),
+            'created_by' => Employee::factory()->create([
+                'manager_id' => null,
+                'department_id' => $department,
             ]),
         ];
     }

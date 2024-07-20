@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('end_date');
             $table->unsignedBigInteger('employee_id');
             $table->foreign('employee_id')->references('id')->on('employees');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('employees');
             $table->timestamps();
         });
     }
